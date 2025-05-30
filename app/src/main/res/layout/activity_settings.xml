@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/api_key_label"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/edit_text_api_key"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/api_key_hint"
+                android:inputType="textPassword"
+                android:layout_marginBottom="16dp"
+                android:background="@android:drawable/editbox_background"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ai_model_label"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_ai_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/ai_models_array"
+                android:layout_marginBottom="16dp"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/generation_config_label"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/temperature_label"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp"/>
+            <EditText
+                android:id="@+id/edit_text_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/temperature_hint"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="8dp"
+                android:background="@android:drawable/editbox_background"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/top_k_label"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp"/>
+            <EditText
+                android:id="@+id/edit_text_top_k"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/top_k_hint"
+                android:inputType="number"
+                android:layout_marginBottom="8dp"
+                android:background="@android:drawable/editbox_background"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/top_p_label"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp"/>
+            <EditText
+                android:id="@+id/edit_text_top_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/top_p_hint"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="16dp"
+                android:background="@android:drawable/editbox_background"/>
+
+            <Button
+                android:id="@+id/button_save_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                android:text="@string/save_settings" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_app_label"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_color"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/text_view_app_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/text_view_app_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/used_libraries_label"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/text_view_libraries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/libraries_list"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gemini_info_label"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/text_view_gemini_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gemini_api_info"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_policy_google_label"
+                android:autoLink="web"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorLink="@android:color/holo_blue_dark"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_policy_gemini_label"
+                android:autoLink="web"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorLink="@android:color/holo_blue_dark"
+                android:layout_marginBottom="16dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/social_media_label"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/social_youtube_ymp_yuri"
+                android:autoLink="web"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorLink="@android:color/holo_blue_dark"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/social_github_ymp_yuri"
+                android:autoLink="web"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorLink="@android:color/holo_blue_dark"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/social_boosty_ymp_yuri"
+                android:autoLink="web"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorLink="@android:color/holo_blue_dark"
+                android:layout_marginBottom="16dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_color">#475b66</color>
+    <color name="primary_dark_color">#333333</color>
+    <color name="accent_color">#475b66</color>
+
+    <color name="chat_bubble_sent">#BBDEFB</color>
+    <color name="chat_bubble_received">#E0E0E0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="grey_medium">#BDBDBD</color>
+
+    <!-- Welcome Activity -->
+    <color name="welcome_red">#FB8C00</color>   <!-- Red 500 -->
+    <color name="welcome_green">#4CAF50</color> <!-- Green 500 -->
+    <color name="welcome_blue">#2196F3</color>  <!-- Blue 500 -->
+</resources>
