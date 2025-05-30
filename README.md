@@ -1,10 +1,9 @@
-# ReOldAi
-<br />
+
 <div align="center">
   <a href="https://github.com/YMP-CO/ReOldAI">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
-
+</div>
 <center><img src="https://img.shields.io/badge/license-CC--BY%204.0-blue.svg"></center>
 <h3 align="center">ReOldAI</h3>
 <center><h5>Unofficial Gemini client for Android 2.3+<h5></center>
@@ -12,7 +11,7 @@
 <div align="center">
   <a href="https://ymp-co.github.io">Website</a> • 
   <a href="https://boosty.to/gachic_the_geek">Boosty</a> • 
-  <a href="https://www.youtube.com/@YMPYuri">YouTube: YMP Yuri</a>
+  <a href="https://www.youtube.com/@YMP_Yuri">YouTube: YMP Yuri</a>
 </div>
 <div align="center">
   <h3 href="https://ymp-co.github.io">⬇️ DOWNLOAD</h3>
@@ -256,7 +255,7 @@ dependencies {
 
 ## Contacts
 
--   YouTube: [YMP Yuri](https://www.youtube.com/@YMPYuri)
+-   YouTube: [YMP Yuri](https://www.youtube.com/@YMP_Yuri)
     
 -   Boosty: [gachic_the_geek](https://boosty.to/gachic_the_geek)
     
