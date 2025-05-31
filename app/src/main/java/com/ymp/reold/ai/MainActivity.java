@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
-                    Toast.makeText(MainActivity.this, "Without the API key, the application will not be able to run.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Without the API key, this application will not function properly.", Toast.LENGTH_LONG).show();
                 }
             });
         } else {
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(aiApiKey)) {
-            Toast.makeText(this, "Please enter your AI API key in the settings.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please enter your AI API key in settings.", Toast.LENGTH_LONG).show();
             showApiKeyDialog(false);
             return;
         }
@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
                         (android.text.ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                 clipboard.setText(text);
             }
-			Toast.makeText(getContext(), "Copied text.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Copied text.", Toast.LENGTH_SHORT).show();
         }
 
         private void deleteMessage(int position) {
