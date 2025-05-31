@@ -317,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
                 ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("AI Chat Message", text);
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(getContext(), "The text is copied.", Toast.LENGTH_SHORT).show();
             }
             // Для Android API 8, 9, 10 (Froyo, Gingerbread ->)
             else {
@@ -325,8 +324,8 @@ public class MainActivity extends AppCompatActivity {
                 android.text.ClipboardManager clipboard =
                         (android.text.ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                 clipboard.setText(text);
-                Toast.makeText(getContext(), "The text is copied (old method).", Toast.LENGTH_SHORT).show();
             }
+			Toast.makeText(getContext(), "Copied text.", Toast.LENGTH_SHORT).show();
         }
 
         private void deleteMessage(int position) {
