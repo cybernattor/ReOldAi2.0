@@ -278,7 +278,6 @@ private void copyTextToClipboard(String text) {
         ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);  
         ClipData clip = ClipData.newPlainText("AI Chat Message", text);  
         clipboard.setPrimaryClip(clip);  
-        Toast.makeText(getContext(), "The text is copied.", Toast.LENGTH_SHORT).show();  
     }  
     // For Android API 8, 9, 10 (Froyo, Gingerbread ->)  
   else {  
@@ -286,8 +285,8 @@ private void copyTextToClipboard(String text) {
   android.text.ClipboardManager clipboard =  
                 (android.text.ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);  
         clipboard.setText(text);  
-        Toast.makeText(getContext(), "The text is copied (old method).", Toast.LENGTH_SHORT).show();  
     }  
+    Toast.makeText(getContext(), "Copied text.", Toast.LENGTH_SHORT).show();  
 }
 ```
 **Also, I want to warn everyone that I am only 16 years old. I am not a professional programmer; I used neural networks for development, etc. Please don't judge too harshly - the project is in beta testing!**
