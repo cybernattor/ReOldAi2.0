@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -213,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private void loadSettings() {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         aiApiKey = prefs.getString(API_KEY_PREF, null);
-        selectedAiModel = prefs.getString(AI_MODEL_PREF, "Gemini 1.5 Flash");
+        selectedAiModel = prefs.getString(AI_MODEL_PREF, "");
         temperature = prefs.getFloat(TEMPERATURE_PREF, 0.9f);
         topK = prefs.getInt(TOP_K_PREF, 40);
         topP = prefs.getFloat(TOP_P_PREF, 0.9f);
@@ -266,6 +268,11 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     }
 
     private void sendMessage() {
+        if (!isNetworkAvailable()) {
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String prompt = promptEditText.getText().toString().trim();
         if (TextUtils.isEmpty(prompt)) {
             Toast.makeText(this, R.string.enter_message, Toast.LENGTH_SHORT).show();
@@ -353,6 +360,15 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        return false;
     }
 
     private void checkStoragePermissionAndSaveChat() {
@@ -528,6 +544,18 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private class ChatMessageAdapter extends ArrayAdapter<ChatMessage> {
         private MainActivity mainActivityContext;
 
+        private static class ViewHolder {
+            RelativeLayout userMessageLayout;
+            TextView userMessageTextView;
+            ImageButton btnCopyUser;
+            ImageButton btnDeleteUser;
+            RelativeLayout aiMessageLayout;
+            TextView aiMessageTextView;
+            ImageButton btnCopyAi;
+            ImageButton btnDeleteAi;
+            ImageButton btnTtsAi;
+        }
+
         public ChatMessageAdapter(Context context, ArrayList<ChatMessage> messages, MainActivity mainActivityContext) {
             super(context, 0, messages);
             this.mainActivityContext = mainActivityContext;
@@ -536,35 +564,37 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             final ChatMessage message = getItem(position);
+            ViewHolder holder;
 
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.chat_message_item, parent, false);
+                holder = new ViewHolder();
+                holder.userMessageLayout = convertView.findViewById(R.id.user_message_layout);
+                holder.userMessageTextView = convertView.findViewById(R.id.user_message_text_view);
+                holder.btnCopyUser = convertView.findViewById(R.id.btn_copy_user);
+                holder.btnDeleteUser = convertView.findViewById(R.id.btn_delete_user);
+                holder.aiMessageLayout = convertView.findViewById(R.id.ai_message_layout);
+                holder.aiMessageTextView = convertView.findViewById(R.id.ai_message_text_view);
+                holder.btnCopyAi = convertView.findViewById(R.id.btn_copy_ai);
+                holder.btnDeleteAi = convertView.findViewById(R.id.btn_delete_ai);
+                holder.btnTtsAi = convertView.findViewById(R.id.btn_tts_ai);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
             }
 
-            RelativeLayout userMessageLayout = convertView.findViewById(R.id.user_message_layout);
-            TextView userMessageTextView = convertView.findViewById(R.id.user_message_text_view);
-            ImageButton btnCopyUser = convertView.findViewById(R.id.btn_copy_user);
-            ImageButton btnDeleteUser = convertView.findViewById(R.id.btn_delete_user);
-
-            RelativeLayout aiMessageLayout = convertView.findViewById(R.id.ai_message_layout);
-            TextView aiMessageTextView = convertView.findViewById(R.id.ai_message_text_view);
-            ImageButton btnCopyAi = convertView.findViewById(R.id.btn_copy_ai);
-            ImageButton btnDeleteAi = convertView.findViewById(R.id.btn_delete_ai);
-            ImageButton btnTtsAi = convertView.findViewById(R.id.btn_tts_ai);
-
-
             if (message.role == ChatMessage.SenderRole.USER) {
-                userMessageLayout.setVisibility(View.VISIBLE);
-                aiMessageLayout.setVisibility(View.GONE);
-                userMessageTextView.setText(message.text);
+                holder.userMessageLayout.setVisibility(View.VISIBLE);
+                holder.aiMessageLayout.setVisibility(View.GONE);
+                holder.userMessageTextView.setText(message.text);
 
-                btnCopyUser.setOnClickListener(new View.OnClickListener() {
+                holder.btnCopyUser.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         copyTextToClipboard(message.text);
                     }
                 });
-                btnDeleteUser.setOnClickListener(new View.OnClickListener() {
+                holder.btnDeleteUser.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         deleteMessage(position);
@@ -572,23 +602,23 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 });
 
             } else { // message.role == ChatMessage.SenderRole.MODEL
-                userMessageLayout.setVisibility(View.GONE);
-                aiMessageLayout.setVisibility(View.VISIBLE);
-                aiMessageTextView.setText(message.text);
+                holder.userMessageLayout.setVisibility(View.GONE);
+                holder.aiMessageLayout.setVisibility(View.VISIBLE);
+                holder.aiMessageTextView.setText(message.text);
 
-                btnCopyAi.setOnClickListener(new View.OnClickListener() {
+                holder.btnCopyAi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         copyTextToClipboard(message.text);
                     }
                 });
-                btnDeleteAi.setOnClickListener(new View.OnClickListener() {
+                holder.btnDeleteAi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         deleteMessage(position);
                     }
                 });
-                btnTtsAi.setOnClickListener(new View.OnClickListener() {
+                holder.btnTtsAi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (getContext() instanceof MainActivity) {
@@ -634,11 +664,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if (selectedAiModel.equals("Gemini 2.0 Flash")) {
-                currentAiModel = "gemini-2.0-flash";
-            } else {
-                currentAiModel = "gemini-1.5-flash";
-            }
+            currentAiModel = selectedAiModel;
         }
 
         @Override

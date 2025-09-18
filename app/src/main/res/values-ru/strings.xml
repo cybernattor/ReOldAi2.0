@@ -17,6 +17,8 @@
     <string name="api_key_hint">Ваш Gemini API ключ</string>
     <string name="ai_model_label">Модель AI:</string>
     <string name="save_settings">Сохранить настройки</string>
+    <string name="get_api_key_label">Получить API ключ:</string>
+    <string name="get_api_key_link">https://aistudio.google.com/app/apikey</string>
 
     <!-- Generation Settings -->
     <string name="generation_config_label">Настройки генерации:</string>
@@ -34,11 +36,7 @@
     <string name="gemini_info_label">Информация о Gemini:</string>
     <string name="gemini_api_info">Использует официальный API Gemini 1.5 Flash / Gemini Pro / Gemini 2.0 Flash.</string>
 
-    <!-- AI Models Array -->
-    <string-array name="ai_models_array">
-        <item>Gemini 1.5 Flash</item>
-        <item>Gemini 2.0 Flash</item>
-    </string-array>
+    
 
     <string name="invalid_temperature_format_toast">Неверный формат температуры. Используется значение по умолчанию.</string>
     <string name="invalid_top_k_format_toast">Неверный формат Top K. Используется значение по умолчанию.</string>
